@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 30px;
+  gap: 16px;
+}
+
+.text {
+  color: #213547;
+  display: flex;
+  align-items: center;
+  font-size: large;
+  font-weight: bold;
+}
+
+.button {
+  margin-right: 100px;
+  padding: 4px 10px;
+  height: 30px;
+  background-color: #3d7782d4;
+  border: 2px rgba(9, 25, 27, 0.729);
+  border-radius: 5px;
+  font-size: 1em;
+  font-weight: 600;
+  color: rgba(9, 25, 27, 0.729);
+  cursor: pointer;
+}
+
+.button:hover {
+  border-color: #250272;
+  background-color: #250272;
+  color: rgb(210, 201, 249);
+}
