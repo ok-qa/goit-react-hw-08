@@ -1,12 +1,18 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { refreshUser } from "./redux/auth/operations";
-import { selectIsRefreshing } from "./redux/auth/selectors";
+import { refreshUser } from "./redux/auth/auth-operations";
+import {
+  selectEmail,
+  selectIsLoggedIn,
+  selectIsRefreshing,
+  selectUser,
+} from "./redux/auth/auth-selectors";
 import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./PrivateRoute";
 import RestrictedRoute from "./RestrictedRoute";
-import css from "./App.module.css";
+import Loader from "./components/Loader/Loader";
+// import css from "./App.module.css";
 
 const HomePage = lazy(() => import("./pages/Home/HomePage"));
 const ContactsPage = lazy(() => import("./pages/Phonebook/PhonebookPage"));
@@ -15,8 +21,22 @@ const RegisterPage = lazy(() =>
 );
 const LoginPage = lazy(() => import("./pages/Login/LoginPage"));
 
-const App = () => {
+const useAuth = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
+  const user = useSelector(selectUser);
+  const email = useSelector(selectEmail);
+
+  return {
+    isLoggedIn,
+    isRefreshing,
+    user,
+    email,
+  };
+};
+
+const App = () => {
+  const { isRefreshing } = useAuth;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,8 +44,9 @@ const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <div>Getting you to your destination</div>
+    <Loader />
   ) : (
+    // <div>Getting you to your destination</div>
     <Layout>
       <Suspense>
         <Routes>
@@ -33,13 +54,13 @@ const App = () => {
           <Route
             path="/contacts"
             element={
-              <PrivateRoute component={<ContactsPage />} registerTo="/login" />
+              <PrivateRoute component={<ContactsPage />} redirectTo="/login" />
             }
           />
           <Route
             path="/register"
             element={
-              <RestrictedRoute component={<RegisterPage />} registerTo="/" />
+              <RestrictedRoute component={<RegisterPage />} redirectTo="/" />
             }
           />
           <Route
@@ -47,7 +68,7 @@ const App = () => {
             element={
               <RestrictedRoute
                 component={<LoginPage />}
-                registerTo="/contacts"
+                redirectTo="/contacts"
               />
             }
           />
