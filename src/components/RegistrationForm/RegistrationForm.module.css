@@ -3,9 +3,8 @@
   margin-top: 170px !important;
   margin: 0 auto;
   padding: 80px 20px 40px 20px;
-  background-color: rgb(223, 220, 247);
+  background-color: #3e7e8a5f;
   backdrop-filter: blur(10px);
-  box-shadow: 0px 0 15px rgb(92, 92, 224);
   border-radius: 8px;
 }
 
@@ -14,7 +13,7 @@
   font-weight: bold;
   font-size: larger;
   line-height: 1;
-  color: #fff;
+  color: rgb(9, 24, 26);
 }
 
 .form {
@@ -45,7 +44,7 @@
   border: 2px solid rgb(92, 92, 224);
   border-radius: 4px;
   font-size: 16px;
-  color: #fff;
+  color: rgb(9, 24, 26);
   cursor: pointer;
   font-weight: 600;
   transition: transform 0.2s ease-in-out;
@@ -53,7 +52,8 @@
 
 .button:hover {
   transform: scale(1.1);
-  background-color: rgba(92, 92, 224);
+  color: #fff;
+  background-color: rgb(76, 76, 182);
   border: 2px solid rgb(92, 92, 224);
 }
 /* .img {
