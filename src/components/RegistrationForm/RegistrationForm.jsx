@@ -19,14 +19,12 @@ const RegistrationForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    dispatch(register(values))
-      .unwrap()
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Registration error", error);
-      });
+    dispatch(register(values));
+    // .unwrap()
+    // .then((data) => {})
+    // .catch((error) => {
+    //   console.error("Registration error", error);
+    // });
     actions.resetForm();
   };
 

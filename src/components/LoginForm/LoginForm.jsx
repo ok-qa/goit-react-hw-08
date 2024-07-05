@@ -7,10 +7,10 @@ import css from "./LoginForm.module.css";
 export default function LoginForm() {
   const dispath = useDispatch();
   const handleSubmit = (values, actions) => {
-    dispath(login(values))
-      .unwrap()
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    dispath(login(values));
+    // .unwrap()
+    // .then((data) => console.log(data))
+    // .catch((error) => console.error(error));
     actions.resetForm();
   };
   return (

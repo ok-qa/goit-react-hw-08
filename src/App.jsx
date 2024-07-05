@@ -6,6 +6,7 @@ import {
   selectEmail,
   selectIsLoggedIn,
   selectIsRefreshing,
+  selectToken,
   selectUser,
 } from "./redux/auth/auth-selectors";
 import Layout from "./components/Layout/Layout";
@@ -26,22 +27,28 @@ const useAuth = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
   const user = useSelector(selectUser);
   const email = useSelector(selectEmail);
+  const token = useSelector(selectToken);
 
   return {
     isLoggedIn,
     isRefreshing,
     user,
     email,
+    token,
   };
 };
 
 const App = () => {
-  const { isRefreshing } = useAuth;
+  const { isRefreshing, token } = useAuth();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(refreshUser());
+    if (token) {
+      dispatch(refreshUser());
+    }
   }, [dispatch]);
+
+  console.log(token);
 
   return isRefreshing ? (
     <Loader />
@@ -76,17 +83,6 @@ const App = () => {
       </Suspense>
     </Layout>
   );
-
-  //  (
-  //   <div className={css.container}>
-  //     <h1>Phonebook</h1>
-  //     <ContactForm />
-  //     <SearchBox />
-  //     {isLoading && <Loader />}
-  //     {isError && <ErrorMessage />}
-  //     <ContactList />
-  //   </div>
-  // );
 };
 
 export default App;

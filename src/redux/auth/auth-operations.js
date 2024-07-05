@@ -16,7 +16,6 @@ export const register = createAsyncThunk(
   "auth/register",
   async (newUser, thunkAPI) => {
     try {
-      // console.log(newUser);
       const response = await axios.post("/users/signup", newUser);
       setAuthHeader(response.data.token);
       toast.success(
@@ -33,7 +32,6 @@ export const login = createAsyncThunk(
   "auth/login",
   async (userInfo, thunkAPI) => {
     try {
-      console.log(userInfo);
       const response = await axios.post("/users/login", userInfo);
       setAuthHeader(response.data.token);
       toast.success("Welcome, you are successfully logged in.");
@@ -56,11 +54,14 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    setAuthHeader(state.auth.token);
-
-    const result = await axios.get("/users/current");
-    return result.data;
+    try {
+      const state = thunkAPI.getState();
+      setAuthHeader(state.auth.token);
+      const response = await axios.get("/users/current");
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
   },
   {
     condition(_, thunkAPI) {
