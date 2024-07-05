@@ -4,7 +4,7 @@ import {
   selectIsLoggedIn,
   selectIsRefreshing,
   selectUser,
-} from "./redux/auth/auth-selectors";
+} from "./redux/auth/selectors";
 import { Navigate } from "react-router-dom";
 
 const useAuth = () => {

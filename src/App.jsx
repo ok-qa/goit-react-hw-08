@@ -1,14 +1,14 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { refreshUser } from "./redux/auth/auth-operations";
+import { refreshUser } from "./redux/auth/operations";
 import {
   selectEmail,
   selectIsLoggedIn,
   selectIsRefreshing,
   selectToken,
   selectUser,
-} from "./redux/auth/auth-selectors";
+} from "./redux/auth/selectors";
 import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./PrivateRoute";
 import RestrictedRoute from "./RestrictedRoute";
